@@ -1,19 +1,31 @@
 import { LoadingButton } from "@mui/lab"
 import { Box, Button, TextField } from "@mui/material"
-import React from "react"
 import { Link } from "react-router-dom"
+import authApi from "../api/authApi"
 
 const Register = () => {
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault()
     //入力欄の文字列を取得
     const data = new FormData(e.target)
-    const username = data.get("username")?.replace(/\s/g, "")
-    const password = data.get("password")?.replace(/\s/g, "")
-    const confirmPassword = data.get("confirmPassword")?.replace(/\s/g, "")
+    const username = data.get("username")?.toString().replace(/\s/g, "")
+    const password = data.get("password")?.toString().replace(/\s/g, "")
+    const confirmPassword = data.get("confirmPassword")?.toString().replace(/\s/g, "")
     console.log(username)
     console.log(password)
     console.log(confirmPassword)
+    //新規登録APIを叩く
+    try {
+      const res = await authApi.register({
+        username,
+        password,
+        confirmPassword,
+      })
+      localStorage.setItem("token", res.token)
+      console.log("新規登録に成功しました");
+    } catch (err) {
+      console.log(err)
+    }
   }
   return (
     <>

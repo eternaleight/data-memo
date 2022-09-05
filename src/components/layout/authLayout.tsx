@@ -1,6 +1,5 @@
 import {Box} from "@mui/material"
 import {Container} from "@mui/system"
-import React from "react"
 import { Outlet } from "react-router-dom"
 import notionLogo from "../../assets/images/notion-logo.png"
 
