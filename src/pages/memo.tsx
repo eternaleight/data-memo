@@ -2,10 +2,15 @@ import { DeleteOutlined, StarBorderOutlined } from "@mui/icons-material"
 import { IconButton, TextField } from "@mui/material"
 import { Box } from "@mui/system"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useParams } from "react-router-dom"
 import memoApi from "../api/memoApi"
+import { setMemo } from "../redux/features/memoSlice"
 
 const Memo = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const memos = useSelector((state: any) => state.memo.value)
   const [title, setTitle] = useState<string>("")
   const [desc, setDesc] = useState<string>("")
   const { memoId } = useParams()
@@ -56,6 +61,13 @@ const Memo = () => {
     try {
       const deletedMemo = await memoApi.delete(memoId)
       console.log(deletedMemo)
+      const newMemos = memos.filter((e: any) => e._id !== memoId)
+      if (newMemos.length === 0) {
+        navigate("/memo")
+      } else {
+        navigate(`/memo/${newMemos[0]._id}`)
+      }
+      dispatch(setMemo(newMemos))
     } catch (err) {
       alert(err)
     }

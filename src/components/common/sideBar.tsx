@@ -20,6 +20,7 @@ const SideBar = () => {
   const user = useSelector((state: any) => state.user.value)
   const memos = useSelector((state: any) => state.memo.value)
   const navigate = useNavigate()
+
   const logout = () => {
     localStorage.removeItem("token")
     navigate("/login")
@@ -42,6 +43,18 @@ const SideBar = () => {
     const activeIndex = memos.findIndex((e: any) => e._id === memoId)
     setActiveIndex(activeIndex)
   }, [navigate])
+
+  const createMemo = async () => {
+    try {
+      const res: any = await memoApi.create()
+      const newMemos = [res, ...memos]
+      dispatch(setMemo(newMemos))
+      navigate(`/memo/${res._id}`)
+      console.log(memos)
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   return (
     <Drawer
@@ -104,7 +117,7 @@ const SideBar = () => {
               プライベート
             </Typography>
             <IconButton>
-              <AddBoxOutlined fontSize="small" />
+              <AddBoxOutlined fontSize="small" onClick={createMemo}/>
             </IconButton>
           </Box>
         </ListItemButton>
