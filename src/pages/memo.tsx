@@ -23,35 +23,43 @@ const Memo = () => {
     getMemo()
   }, [memoId])
 
-  let timer:any
+  let timer: any
   const timeout = 500
 
-  const updateTitle = async(e:any) => {
+  const updateTitle = async (e: any) => {
     clearTimeout(timer)
     const newTitle = e.target.value
     setTitle(newTitle)
-    timer = setTimeout(async() => {
-      try{
-        await memoApi.update(memoId, {title: newTitle})
-      }catch(err){
+    timer = setTimeout(async () => {
+      try {
+        await memoApi.update(memoId, { title: newTitle })
+      } catch (err) {
         alert(err)
       }
-    },timeout)
+    }, timeout)
   }
 
-  const updateDesc = async(e:any) => {
+  const updateDesc = async (e: any) => {
     clearTimeout(timer)
     const newDesc = e.target.value
     setDesc(newDesc)
-    timer = setTimeout(async() => {
-      try{
-        await memoApi.update(memoId, {description: newDesc})
-      }catch(err){
+    timer = setTimeout(async () => {
+      try {
+        await memoApi.update(memoId, { description: newDesc })
+      } catch (err) {
         alert(err)
       }
-    },timeout)
+    }, timeout)
   }
 
+  const deleteMemo = async () => {
+    try {
+      const deletedMemo = await memoApi.delete(memoId)
+      console.log(deletedMemo)
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   return (
     <>
@@ -67,7 +75,7 @@ const Memo = () => {
           <StarBorderOutlined />
         </IconButton>
         <IconButton color="error">
-          <DeleteOutlined />
+          <DeleteOutlined onClick={deleteMemo} />
         </IconButton>
       </Box>
       <Box sx={{ p: "10px 50px" }}>
@@ -79,8 +87,8 @@ const Memo = () => {
           fullWidth
           sx={{
             ".MuiOutlinedInput-input": { p: 0 },
-          ".MuiOutlinedInput-notchedOutline": { border: "none" },
-          ".MuiOutlinedInput-root": { fontSize: "2rem", fontWeight: "700" },
+            ".MuiOutlinedInput-notchedOutline": { border: "none" },
+            ".MuiOutlinedInput-root": { fontSize: "2rem", fontWeight: "700" },
           }}
         />
         <TextField
@@ -91,8 +99,8 @@ const Memo = () => {
           fullWidth
           sx={{
             ".MuiOutlinedInput-input": { p: 0 },
-          ".MuiOutlinedInput-notchedOutline": { border: "none" },
-          ".MuiOutlinedInput-root": { fontSize: "1rem", fontWeight: "0" },
+            ".MuiOutlinedInput-notchedOutline": { border: "none" },
+            ".MuiOutlinedInput-root": { fontSize: "1rem", fontWeight: "0" },
           }}
         />
       </Box>
