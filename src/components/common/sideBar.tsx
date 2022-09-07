@@ -7,17 +7,42 @@ import {
   Typography,
 } from "@mui/material"
 import { Box } from "@mui/system"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import assets from "../../assets"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+import memoApi from "../../api/memoApi"
+import { setMemo } from "../../redux/features/memoSlice"
 
 const SideBar = () => {
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+  const dispatch = useDispatch()
   const user = useSelector((state: any) => state.user.value)
+  const memos = useSelector((state: any) => state.memo.value)
   const navigate = useNavigate()
   const logout = () => {
     localStorage.removeItem("token")
     navigate("/login")
   }
+  const { memoId } = useParams()
+
+  useEffect(() => {
+    const getMemos = async () => {
+      try {
+        const res = await memoApi.getAll()
+        dispatch(setMemo(res))
+      } catch (err) {
+        alert(err)
+      }
+    }
+    getMemos()
+  }, [dispatch])
+
+  useEffect(() => {
+    const activeIndex = memos.findIndex((e: any) => e._id === memoId)
+    setActiveIndex(activeIndex)
+  }, [navigate])
+
   return (
     <Drawer
       container={window.document.body}
@@ -83,15 +108,20 @@ const SideBar = () => {
             </IconButton>
           </Box>
         </ListItemButton>
-        <ListItemButton sx={{ pl: "20px" }} component={Link} to="/memo/asdf">
-          <Typography>📝 無題</Typography>
-        </ListItemButton>
-        <ListItemButton sx={{ pl: "20px" }} component={Link} to="/memo/asdf">
-          <Typography>📝 無題</Typography>
-        </ListItemButton>
-        <ListItemButton sx={{ pl: "20px" }} component={Link} to="/memo/asdf">
-          <Typography>📝 無題</Typography>
-        </ListItemButton>
+        {memos.map((item: any, index: number) => (
+          <ListItemButton
+            sx={{ pl: "20px" }}
+            component={Link}
+            to={`memo/${item._id}`}
+            key={item._id}
+            selected={index === activeIndex}
+          >
+            <Typography>
+              {item.icon}
+              {item.title}
+            </Typography>
+          </ListItemButton>
+        ))}
       </List>
     </Drawer>
   )
