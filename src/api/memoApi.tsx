@@ -1,8 +1,9 @@
-import axiosClient from "./axiosclient";
+import axiosClient from "./axiosclient"
 
 const memoApi = {
   create: () => axiosClient.post("memo"),
   getAll: () => axiosClient.get("memo"),
-  getOne: (id:any) => axiosClient.get(`memo/${id}`)
+  getOne: (id: any) => axiosClient.get(`memo/${id}`),
+  update: (id: any, params: any) => axiosClient.put(`memo/${id}`,params),
 }
 export default memoApi
