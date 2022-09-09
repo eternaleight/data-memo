@@ -1,4 +1,8 @@
-import { DeleteOutlined, StarBorderOutlined } from "@mui/icons-material"
+import {
+  DeleteOutlined,
+  DensityMedium,
+  StarBorderOutlined,
+} from "@mui/icons-material"
 import { IconButton, TextField } from "@mui/material"
 import { Box } from "@mui/system"
 import { useEffect, useState } from "react"
@@ -6,15 +10,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import memoApi from "../api/memoApi"
 import { setMemo } from "../redux/features/memoSlice"
+import { setBar } from "../redux/features/barSlice"
 import EmojiPicker from "../components/common/emojipicker"
 
 const Memo = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const memos = useSelector((state: any) => state.memo.value)
+  const barBool = useSelector((state: any) => state.bar.value)
   const [title, setTitle] = useState<string>("")
   const [desc, setDesc] = useState<string>("")
   const [icon, setIcon] = useState<string>("")
+  const barVisible = () => dispatch(setBar(!barBool))
   const { memoId } = useParams()
   useEffect(() => {
     const getMemo = async () => {
@@ -23,7 +30,7 @@ const Memo = () => {
         setTitle(res.title)
         setDesc(res.description)
         setIcon(res.icon)
-        console.log(res.description)
+        // console.log(res.description)
       } catch (err) {
         alert(err)
       }
@@ -76,7 +83,7 @@ const Memo = () => {
     }
   }
 
-  const onIconChange = async(newIcon: any) => {
+  const onIconChange = async (newIcon: any) => {
     let temp = [...memos]
     const index = temp.findIndex((e) => e._id === memoId)
     temp[index] = { ...temp[index], icon: newIcon }
@@ -97,19 +104,24 @@ const Memo = () => {
           alignItems: "center",
           justifyContent: "",
           width: "100%",
-          backgroundColor: ""
+          backgroundColor: "",
         }}
       >
         <IconButton>
-          <StarBorderOutlined className=""/>
+          <StarBorderOutlined className="" />
         </IconButton>
         <IconButton color="error">
-          <DeleteOutlined onClick={deleteMemo}/>
+          <DeleteOutlined onClick={deleteMemo} />
         </IconButton>
+        <div className='absolute sm:hidden right-2' onClick={barVisible}>
+        <IconButton>
+          <DensityMedium />
+        </IconButton>
+        </div>
       </Box>
       <Box sx={{ p: "10px 50px" }}>
         <Box>
-          <EmojiPicker icon={icon} onIconChange={onIconChange}/>
+          <EmojiPicker icon={icon} onIconChange={onIconChange} />
           <TextField
             onChange={updateTitle}
             value={title}

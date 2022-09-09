@@ -1,6 +1,5 @@
 import { LoadingButton } from "@mui/lab"
 import { Box } from "@mui/system"
-import { AxiosResponse } from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import memoApi from "../api/memoApi"
@@ -30,6 +29,7 @@ const Home = () => {
         justifyContent: "center",
       }}
     >
+      <div className="absolute top-[45%]">
       <LoadingButton
         variant="outlined"
         onClick={() => createMemo()}
@@ -37,6 +37,7 @@ const Home = () => {
       >
         最初のメモを作成
       </LoadingButton>
+      </div>
     </Box>
   )
 }

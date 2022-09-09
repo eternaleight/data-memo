@@ -18,6 +18,7 @@ const AuthLayout = () => {
     }
     checkAuth()
   },[navigate])
+
   return (
     <div>
       <Container component="main" maxWidth="xs">

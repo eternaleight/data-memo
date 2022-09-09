@@ -62,6 +62,7 @@ const SideBar = () => {
       variant="permanent"
       open={true}
       sx={{ width: 250, height: "100vh" }}
+        // {/* className="sm:!w-[250px]" */}
     >
       <List
         sx={{
@@ -69,6 +70,7 @@ const SideBar = () => {
           height: "100vh",
           backgroundColor: "#222233",
         }}
+        // className="sm:!w-[250px]"
       >
         <ListItemButton>
           <Box

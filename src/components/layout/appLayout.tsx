@@ -1,18 +1,26 @@
 import { Box } from "@mui/material"
-import { Container } from "@mui/system"
-import { useEffect } from "react"
+import { IconButton } from "@mui/material"
+import { DensityMedium } from "@mui/icons-material"
+import { useEffect, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
 import notionLogo from "../../assets/images/notion-logo.png"
 import authUtils from "../../utils/authUtils"
 import SideBar from "../common/sideBar"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../redux/features/userSlice"
+import { useSelector } from "react-redux"
+import { setBar } from "../../redux/features/barSlice"
 
 const AppLayout = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  // const [barVisible, setBarVisible] = useState<boolean>(false)
+  // const barVisibled = () => setBarVisible(!barVisible)
+  const barBool = useSelector((state: any) => state.bar.value)
+  const barVisible = () => dispatch(setBar(!barBool))
 
   useEffect(() => {
+    setBar(!barBool)
     //JWTを持っているか確認する
     const checkAuth = async () => {
       //認証チェック
@@ -26,10 +34,16 @@ const AppLayout = () => {
     }
     checkAuth()
   }, [navigate])
+
   return (
     <div>
       <Box sx={{ display: "flex" }}>
-        <SideBar />
+        <div className="absolute top-2 right-2" onClick={barVisible}>
+          <IconButton>
+            <DensityMedium />
+          </IconButton>
+        </div>
+        {barBool ? <SideBar /> : undefined}
         <Box sx={{ flexGrow: 1, p: 1, width: "max-content" }}>
           <Outlet />
         </Box>
