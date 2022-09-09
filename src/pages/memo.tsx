@@ -97,13 +97,14 @@ const Memo = () => {
           alignItems: "center",
           justifyContent: "",
           width: "100%",
+          backgroundColor: ""
         }}
       >
         <IconButton>
-          <StarBorderOutlined />
+          <StarBorderOutlined className=""/>
         </IconButton>
         <IconButton color="error">
-          <DeleteOutlined onClick={deleteMemo} />
+          <DeleteOutlined onClick={deleteMemo}/>
         </IconButton>
       </Box>
       <Box sx={{ p: "10px 50px" }}>

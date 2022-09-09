@@ -67,7 +67,7 @@ const SideBar = () => {
         sx={{
           width: 250,
           height: "100vh",
-          backgroundColor: assets.colors.secondary,
+          backgroundColor: "#222233",
         }}
       >
         <ListItemButton>

@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.MuiSvgIcon-root {
+  color: #eef;
+}
+
+ {
+  background: #eeeeff !important;
+  border-radius: 4px;
+}
+
+body {
+}
+
 .App {
   text-align: center;
 }
@@ -40,3 +52,4 @@
     transform: rotate(360deg);
   }
 }
+

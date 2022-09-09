@@ -12,26 +12,34 @@ import Memo from "./pages/memo"
 
 function App() {
   const theme = createTheme({
-    palette: { primary: blue },
+    palette: {
+      primary: blue,
+      background: {
+        default: "#111123",
+      },
+      text: { primary: "#cbd5e1" },
+    },
   })
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/" element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-          <Route path="/" element={<AppLayout />}>
-            <Route index element={<Home />} />
-            <Route path="memo" element={<Home />} />
-            <Route path="memo/:memoId" element={<Memo />} />
-          </Route>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <div className="">
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Routes>
+            <Route path="/" element={<AuthLayout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route path="/" element={<AppLayout />}>
+              <Route index element={<Home />} />
+              <Route path="memo" element={<Home />} />
+              <Route path="memo/:memoId" element={<Memo />} />
+            </Route>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </div>
   )
 }
 

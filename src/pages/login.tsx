@@ -4,6 +4,10 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import authApi from "../api/authApi"
 
+ export const style = {
+    c: "bg-[#fdfdff] rounded-[4px]",
+  }
+
 const Login = () => {
   const navigate = useNavigate()
   const [usernameErrText, setUsernameErrText] = useState("")
@@ -71,6 +75,7 @@ const Login = () => {
           margin="normal"
           name="username"
           required
+          className={style.c}
           helperText={usernameErrText}
           error={usernameErrText !== ""}
           disabled={loading}
@@ -83,7 +88,7 @@ const Login = () => {
           name="password"
           required
           type="password"
-          className=""
+          className={style.c}
           helperText={passwordErrText}
           error={passwordErrText !== ""}
           disabled={loading}

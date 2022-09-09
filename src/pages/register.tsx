@@ -3,6 +3,7 @@ import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import authApi from "../api/authApi"
+import { style } from "./login"
 
 const Register = () => {
   const navigate = useNavigate()
@@ -87,6 +88,7 @@ const Register = () => {
           margin="normal"
           name="username"
           required
+          className={style.c}
           helperText={usernameErrText}
           error={usernameErrText !== ""}
           disabled={loading}
@@ -99,7 +101,7 @@ const Register = () => {
           name="password"
           required
           type="password"
-          className=""
+          className={style.c}
           helperText={passwordErrText}
           error={passwordErrText !== ""}
           disabled={loading}
@@ -112,7 +114,7 @@ const Register = () => {
           name="confirmPassword"
           required
           type="password"
-          className=""
+          className={style.c}
           helperText={confirmErrText}
           error={confirmErrText !== ""}
           disabled={loading}

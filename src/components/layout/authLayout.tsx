@@ -27,8 +27,8 @@ const AuthLayout = () => {
           flexDirection: "column",
           alignItems: "center"
           }}>
-          <img src={notionLogo} alt="" style={{ width: 100, height: 100, marginBottom: 3}}/>
-          Notion 開発
+          <img src="https://i.imgur.com/GMr4c7d.png" alt="" style={{ width: 100, height: 100, marginBottom: 8}}/>
+          data Memo
         </Box>
         <Outlet />
       </Container>
