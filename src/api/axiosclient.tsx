@@ -1,6 +1,9 @@
 import axios from "axios"
 
-const BASE_URL = "https://n-backend-production.up.railway.app/api/v1"
+const BASE_URL = "https://n-backend.onrender.com/api/v1"
+// const BASE_URL = "http://localhost:5001/api/v1"
+// const BASE_URL = "https://n-backend-production.up.railway.app/api/v1"
+// const BASE_URL = "https://brick-red-pelican-wear.cyclic.app/api/v1"
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
