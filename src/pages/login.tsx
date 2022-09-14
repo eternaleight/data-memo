@@ -49,11 +49,11 @@ const Login = () => {
       })
       setLoading(false)
       localStorage.setItem("token", res.token)
-      console.log("ログインに成功しました")
+      // console.log("ログインに成功しました")
       navigate("/")
     } catch (err:any) {
-      const errors = err.data.errors
-      console.log(err)
+      const errors = err.data.errors.msg
+      // console.log(errors)
       errors.forEach((err:any) => {
         if (err.param === "username") {
           setUsernameErrText(err.msg)
