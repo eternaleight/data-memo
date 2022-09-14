@@ -50,7 +50,7 @@ const SideBar = () => {
       const newMemos = [res, ...memos]
       dispatch(setMemo(newMemos))
       navigate(`/memo/${res._id}`)
-      console.log(memos)
+      // console.log(memos)
     } catch (err) {
       alert(err)
     }

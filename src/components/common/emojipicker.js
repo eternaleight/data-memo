@@ -14,11 +14,11 @@ const EmojiPicker = ({ icon, onIconChange }) => {
 
   const selectEmoji = (e) => {
     const emojiCode = e.unified.split("-")
-    console.log(emojiCode)
+    // console.log(emojiCode)
     let codesArray = []
     emojiCode.forEach((el) => codesArray.push("0x" + el))
     const emoji = String.fromCodePoint(...codesArray)
-    console.log(emoji)
+    // console.log(emoji)
     setTimeout(() => {
       setIsShowPicker(false)
     }, 0)

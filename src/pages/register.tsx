@@ -26,9 +26,9 @@ const Register = () => {
       .get("confirmPassword")
       ?.toString()
       .replace(/\s/g, "")
-    console.log(username)
-    console.log(password)
-    console.log(confirmPassword)
+    // console.log(username)
+    // console.log(password)
+    // console.log(confirmPassword)
     let error = false
 
     if (username === "") {

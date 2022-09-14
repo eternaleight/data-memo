@@ -23,8 +23,8 @@ const Login = () => {
     const data = new FormData(e.target)
     const username = data.get("username")?.toString().replace(/\s/g, "")
     const password = data.get("password")?.toString().replace(/\s/g, "")
-    console.log(username)
-    console.log(password)
+    // console.log(username)
+    // console.log(password)
     let error = false
 
     if (username === "") {
