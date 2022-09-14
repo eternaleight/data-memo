@@ -128,6 +128,7 @@ const Memo = () => {
             placeholder="無題"
             variant="outlined"
             fullWidth
+            multiline
             sx={{
               ".MuiOutlinedInput-input": { p: 0 },
               ".MuiOutlinedInput-notchedOutline": { border: "none" },
@@ -138,12 +139,13 @@ const Memo = () => {
             onChange={updateDesc}
             value={desc}
             placeholder="追加"
-            variant="outlined"
             fullWidth
+            id="standard-textarea"
+            multiline
             sx={{
               ".MuiOutlinedInput-input": { p: 0 },
-              ".MuiOutlinedInput-notchedOutline": { border: "none" },
-              ".MuiOutlinedInput-root": { fontSize: "1rem", fontWeight: "0" },
+            ".MuiOutlinedInput-notchedOutline": { border: "none" },
+            ".MuiOutlinedInput-root": { fontSize: "1rem", fontWeight: "0" },
             }}
           />
         </Box>

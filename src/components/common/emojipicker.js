@@ -37,7 +37,7 @@ const EmojiPicker = ({ icon, onIconChange }) => {
       </Typography>
       <Box
         sx={{
-          display: isShowPicker ? "bblock" : "none",
+          display: isShowPicker ? "block" : "none",
           position: "absolute",
           zIndex: "100",
         }}

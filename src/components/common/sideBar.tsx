@@ -8,7 +8,6 @@ import {
 } from "@mui/material"
 import { Box } from "@mui/system"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import assets from "../../assets"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import memoApi from "../../api/memoApi"
@@ -25,6 +24,7 @@ const SideBar = () => {
     localStorage.removeItem("token")
     navigate("/login")
   }
+
   const { memoId } = useParams()
 
   useEffect(() => {
@@ -57,88 +57,88 @@ const SideBar = () => {
   }
 
   return (
-    <Drawer
-      container={window.document.body}
-      variant="permanent"
-      open={true}
-      sx={{ width: 250, height: "100vh" }}
+      <Drawer
+        container={window.document.body}
+        variant="permanent"
+        open={true}
+        sx={{ width: 250, height: "100vh" }}
         // {/* className="sm:!w-[250px]" */}
-    >
-      <List
-        sx={{
-          width: 250,
-          height: "100vh",
-          backgroundColor: "#222233",
-        }}
-        // className="sm:!w-[250px]"
       >
-        <ListItemButton>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography variant="body2" fontWeight="700">
-              {user.username}
-            </Typography>
-            <IconButton onClick={logout}>
-              <LogoutOutlined />
-            </IconButton>
-          </Box>
-        </ListItemButton>
-        <Box sx={{ pt: "10px" }}></Box>
-        <ListItemButton>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography variant="body2" fontWeight="700">
-              お気に入り
-            </Typography>
-            <IconButton></IconButton>
-          </Box>
-        </ListItemButton>
-        <Box sx={{ pt: "10px" }}></Box>
-        <ListItemButton>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography variant="body2" fontWeight="700">
-              プライベート
-            </Typography>
-            <IconButton>
-              <AddBoxOutlined fontSize="small" onClick={createMemo}/>
-            </IconButton>
-          </Box>
-        </ListItemButton>
-        {memos.map((item: any, index: number) => (
-          <ListItemButton
-            sx={{ pl: "20px" }}
-            component={Link}
-            to={`memo/${item._id}`}
-            key={item._id}
-            selected={index === activeIndex}
-          >
-            <Typography>
-              {item.icon}
-              {item.title}
-            </Typography>
+        <List
+          sx={{
+            width: 250,
+            height: "100vh",
+            backgroundColor: "#222233",
+          }}
+          // className="sm:!w-[250px]"
+        >
+          <ListItemButton>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body2" fontWeight="700">
+                {user.username}
+              </Typography>
+              <IconButton onClick={logout}>
+                <LogoutOutlined />
+              </IconButton>
+            </Box>
           </ListItemButton>
-        ))}
-      </List>
-    </Drawer>
+          <Box sx={{ pt: "10px" }}></Box>
+          <ListItemButton>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body2" fontWeight="700">
+                お気に入り
+              </Typography>
+              <IconButton></IconButton>
+            </Box>
+          </ListItemButton>
+          <Box sx={{ pt: "10px" }}></Box>
+          <ListItemButton>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body2" fontWeight="700">
+                プライベート
+              </Typography>
+              <IconButton>
+                <AddBoxOutlined fontSize="small" onClick={createMemo} />
+              </IconButton>
+            </Box>
+          </ListItemButton>
+          {memos.map((item: any, index: number) => (
+            <ListItemButton
+              sx={{ pl: "20px" }}
+              component={Link}
+              to={`memo/${item._id}`}
+              key={item._id}
+              selected={index === activeIndex}
+            >
+              <Typography className='overflow-hidden'>
+                {item.icon}
+                {item.title}
+              </Typography>
+            </ListItemButton>
+          ))}
+        </List>
+      </Drawer>
   )
 }
 export default SideBar
