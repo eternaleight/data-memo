@@ -9,7 +9,7 @@ import {
 import { Box } from "@mui/system"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import memoApi from "../../api/memoApi"
 import { setMemo } from "../../redux/features/memoSlice"
 
@@ -20,12 +20,6 @@ const SideBar = () => {
   const memos = useSelector((state: any) => state.memo.value)
   const navigate = useNavigate()
 
-  const logout = () => {
-    localStorage.removeItem("token")
-    navigate("/login")
-  }
-
-  const { memoId } = useParams()
 
   useEffect(() => {
     const getMemos = async () => {
@@ -33,11 +27,18 @@ const SideBar = () => {
         const res = await memoApi.getAll()
         dispatch(setMemo(res))
       } catch (err) {
-        alert(err)
+        // alert(err)
       }
     }
     getMemos()
   }, [dispatch])
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
+
+  const { memoId } = useParams()
 
   useEffect(() => {
     const activeIndex = memos.findIndex((e: any) => e._id === memoId)
