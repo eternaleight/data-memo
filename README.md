@@ -1,4 +1,4 @@
-## Data Memo (under development）
+## Data Memo (開発中）
 #### Backend
 https://github.com/eternaleight/data-backend
 
